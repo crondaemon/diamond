@@ -39,10 +39,7 @@ jobs:
           Set-ExecutionPolicy RemoteSigned -Scope Process
           Compress-Archive -Path bin/diamond.exe -DestinationPath bin/diamond-windows.zip
 
-      - name: Upload Release Asset
-        uses: softprops/action-gh-release@v2
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
         with:
-          files: |
-            bin/diamond-linux.gz
-            bin/diamond-windows.zip
-            LICENSE.txt
+          path: bin/diamond-*.*
