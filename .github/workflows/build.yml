@@ -29,7 +29,6 @@ jobs:
           docker exec alpine shards build --release --static
           docker exec alpine chmod +x bin/diamond
           docker exec alpine gzip bin/diamond
-          docker exec alpine mv bin/diamond.gz bin/diamond-linux.gz
 
       - name: Run Windows Build x64
         if: matrix.os == 'windows'
@@ -37,10 +36,9 @@ jobs:
           shards install --without-development --release
           shards build --release --static
           Set-ExecutionPolicy RemoteSigned -Scope Process
-          Compress-Archive -Path bin/diamond.exe -DestinationPath bin/diamond-windows.zip
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.os }}-artifact
-          path: bin/diamond-*
+          path: bin/*
