@@ -24,10 +24,9 @@ jobs:
         run: |
           mkdir -p bin
           chmod 755 bin
-          docker run -d --name alpine -v $(pwd):/workspace -w /workspace crystallang/crystal:latest-alpine tail -f /dev/null
-          docker exec alpine shards install --without-development --release --static
-          docker exec alpine shards build --release --static
-          docker exec alpine chmod +x bin/diamond
+          shards install --without-development --release --static
+          shards build --release --static
+          chmod +x bin/diamond
 
       - name: Run Windows Build x64
         if: matrix.os == 'windows'
